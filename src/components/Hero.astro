@@ -1,0 +1,42 @@
+---
+import GithubIcon from "../icons/GithubIcon.astro";
+import GmailIcon from "../icons/GmailIcon.astro";
+import LinkedInIcon from "../icons/LinkedInIcon.astro";
+import Badge from "./Badge.astro";
+import SocialPill from "./SocialPill.astro";
+
+
+
+---
+
+<div class="flex flex-row gap-x-4 items-center mb-4">
+
+    <img class={"bg-cover bg-center object-cover rounded-full  size-16 md:size-14"} src={`/projects/logo.png`} alt={""}/>
+    <a href="https://www.linkedin.com/in/lewin-lovo-07303821b/" target="_blank" rel="noopener" class="flex justify-center items-center">
+        <Badge>Aviable to Jobs</Badge>
+    </a> 
+</div>
+<h1 class="text-withe  font-bold flex flex-row gap-x-4 pb-4 md:text-5xl text-3xl">
+    Hi, I'm Llovo-Dev
+</h1>
+<h2 class="lg:text-2xl text-wrap md:text-xl text-md">
+    <span>+2 Years of experence.</span> <span class="opacity-80 text-yellow-200/90"> Web Developer and future Content Create</span>, <span class="text-red-100">From Nicaragua</span>. Master to buildin unique solutions  
+</h2>
+
+<nav class="flex gap-x-2 md:gap-x-4 mt-8 flex-wrap gap-y-2 md:gap-y-4">
+    <SocialPill href="https://www.linkedin.com/in/lewin-lovo-07303821b/">
+        <LinkedInIcon class="size-4 md:size-5"/>
+        Linkedin
+    </SocialPill>
+    
+    <SocialPill href="https://github.com/llovo-code">
+        <GithubIcon class="size-4 md:size-5"/>
+        Github
+    </SocialPill>
+
+    <SocialPill href="mailto:lewinjoselovo@gmail.com">
+        <GmailIcon class="size-4 md:size-5"/>
+        lewinjoselovo@gmail.com
+    </SocialPill>
+    
+</nav>

@@ -1,0 +1,63 @@
+---
+import NextJSIcon from "../icons/NextJSIcon.astro";
+import TailwindIcon from "../icons/TailwindIcon.astro";
+
+const TAGS = {
+  NEXT: {
+    name: "Next.js",
+    class: "bg-black text-white",
+    icon: NextJSIcon,
+  },
+  TAILWIND: {
+    name: "Tailwind CSS",
+    class: "bg-sky-900 text-[#73bcf6]  dark:text-white ",
+    icon: TailwindIcon,
+  },
+};
+
+//dark:text-[#73bcf6]
+
+const PROJECTS = [
+  {
+    title: "ANY.RUN - Interactive Online Malware Sandbox",
+    description:
+      "Cloud-based malware analysis service. Take your information security to the next level. Analyze suspicious and malicious activities using our innovative tools.",
+    link: "https://any.run/",
+    github: "",
+    image: "/projects/anyrun.png",
+    tags: [TAGS.NEXT, TAGS.TAILWIND],
+  },{
+    title: "ANY.RUN - Interactive Online Malware Sandbox",
+    description:
+      "Cloud-based malware analysis service. Take your information security to the next level. Analyze suspicious and malicious activities using our innovative tools.",
+    link: "https://any.run/",
+    github: "",
+    image: "/projects/anyrun.png",
+    tags: [TAGS.NEXT, TAGS.TAILWIND],
+  },
+];
+---
+
+{
+  PROJECTS.map(({ title, description, link, github, image, tags }) => (
+    <article class="mb-4">
+      <h3 class="text-xl md:text-2xl font-semibold text-yellow-200 mb-2">{title}</h3>
+      <p class="text-md md:text-lg mb-4 text-pretty">{description}</p>
+      <ul class="flex gap-x-4 flex-row mb-4">
+        {tags.map((tag) => (
+          <li >
+            <span  class={`flex flex-row items-center gap-x-2 rounded-full text-sm ${tag.class} py-1 px-2`}>
+              <tag.icon class="size-5 md:size-7" /> {tag.name}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <img
+        class="rounded shadow-2xl shadow-white/10"
+        src={image}
+        alt={"captura de pantalla del la imagen"}
+        srcset=""
+      />
+    </article>
+  ))
+}
