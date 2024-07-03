@@ -3,24 +3,34 @@
 interface Props{
     title?: string;
     image?:string;
+    ref?:string
 }
-const {title,image} = Astro.props
+const {title,image,ref} = Astro.props
 ---
 
 
 
-<a href="#" class="text-blue-600 underline dark:text-blue-500 hover:no-underline" data-popover-target="popover-image" id="popover-trigger">{title}</a>
-<div data-popover id="popover-target" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
-    <div class="grid grid-cols-5">
+<a 
+    href={ref}
+    class="text-blue-600 underline dark:text-blue-500 hover:no-underline" data-popover-target="popover-image" 
+    id="popover-trigger">
+    {title}
+</a>
+<div data-popover id="popover-target" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-auto md:w-96 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+    <div class="grid md:grid-cols-2 ">
+
+        <slot name="popover-section"/>
+    </div>
+
+    <!-- <div class="grid grid-cols-2">
         <div class="col-span-3 p-3">
             <div class="space-y-2">
                 <h3 class="font-semibold text-gray-900 dark:text-white">About Italy</h3>
                 <p>Italy is located in the middle of the Mediterranean Sea, in Southern Europe it is also considered part of Western Europe. A unitary parliamentary republic with Rome as its capital and largest city.</p>
-             
             </div>
         </div>
-        <img src="/projects/anyrun.png" class="h-full col-span-2" alt="Italy map" />
-    </div>
+        <img src="/projects/anyrun.png" class="h-full " alt="Italy map" />
+    </div> -->
     <div data-popper-arrow></div>
 </div>
 
@@ -63,6 +73,8 @@ const popover = new Popover($targetEl, $triggerEl, options, instanceOptions);
 
 if($triggerEl){
     $triggerEl.addEventListener('hover', () => { popover.toggle()})
+    $triggerEl.addEventListener('click', () => { popover.toggle()})
+    $triggerEl.addEventListener('click', (event) => { event.preventDefault()})
 }
 
 
