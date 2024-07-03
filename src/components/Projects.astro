@@ -1,6 +1,10 @@
 ---
+import GithubIcon from "@/icons/GithubIcon.astro";
+import WwwIcon from "@/icons/WwwIcon.astro"
 import NextJSIcon from "../icons/NextJSIcon.astro";
 import TailwindIcon from "../icons/TailwindIcon.astro";
+import LinkButton from "./LinkButton.astro";
+
 
 const TAGS = {
   NEXT: {
@@ -37,23 +41,42 @@ const PROJECTS = [
   },
 ];
 ---
+<section class="flex flex-col gap-y-12 mb-16">
 
-{
-  PROJECTS.map(({ title, description, link, github, image, tags }) => (
-    <article class="mb-4">
-      <h3 class="text-xl md:text-2xl font-semibold text-yellow-200 mb-2">{title}</h3>
-      <p class="text-md md:text-lg mb-4 text-pretty">{description}</p>
-      <ul class="flex gap-x-4 flex-row mb-4">
-        {tags.map((tag) => (
-          <li >
-            <span  class={`flex flex-row items-center gap-x-2 rounded-full text-sm ${tag.class} py-1 px-2`}>
-              <tag.icon class="size-5 md:size-7" /> {tag.name}
-            </span>
-          </li>
-        ))}
-      </ul>
+  {
+    PROJECTS.map(({ title, description, link, github, image, tags }) => (
+    <article class="flex flex-col md:flex-row-reverse gap-6">
+      <div class="flex flex-col gap-y-2 justify-between">
+        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">{title}</h3>
+        <ul class="flex gap-x-4 flex-row mb-2">
+          {tags.map((tag) => (
+            <li >
+              <span  class={`flex flex-row items-center gap-x-2 rounded-full text-xs ${tag.class} py-1 px-3`}>
+                <tag.icon class="size-4 md:size-4" /> {tag.name}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p class="text-md md:text-md mb-2 text-pretty">{description}</p>
+        <footer class=" flex gap-x-2">
+          {
+            github && (
+              <LinkButton href={github} text="Github">
+                <GithubIcon slot={"icon-before"} class="size-4 md:size-5" />
+              </LinkButton>
+            )
+          }
+          {
+            link && (
+              <LinkButton href={link} text="Sitio Web">
+                <WwwIcon slot={"icon-before"} class="size-4 md:size-5" />
+              </LinkButton>
+            )
+          }
+        </footer>
+      </div>
       <img
-        class="rounded shadow-2xl shadow-white/10"
+        class="rounded w-full h-64 shadow-2xl shadow-white/10"
         src={image}
         alt={"captura de pantalla del la imagen"}
         srcset=""
@@ -61,3 +84,4 @@ const PROJECTS = [
     </article>
   ))
 }
+</section>
