@@ -3,16 +3,116 @@ import Image from "astro/components/Image.astro";
 import Logo from "../icons/Logo.astro";
 import logoIco from "../img/logo.png";
 
+const navItems = [
+    {
+        title:"Home",
+        label:"Home",
+        url:"/#"
+    },{
+        title:"Experience",
+        label:"Experience",
+        url:"/#Experience"
+    },{
+        title:"Projects",
+        label:"Projects",
+        url:"/#Projects"
+    },{
+        title:"About Me",
+        label:"AboutMe",
+        url:"/#AboutMe"
+    },{
+        title:"Contact",
+        label:"Contact",
+        url:"mailto:lewinjoselovo@gmail.com"
+    }
+];
+
+//console.log(navItems);
 ---
 
 <header class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2 
 ">
 
-    <nav class="flex flex-row gap-x-2 md:gap-x-10 bg-gray-950 rounded-full px-4 py-1">
-        <a href="/">Home</a>
+    <nav class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center">
+        {
+           navItems.map(item => (
+                
+                <a
+                class="relative block px-2 py-2 transition hover:text-yellow-500 dark:hover:text-yellow-400"
+                href={item.url}
+                aria-label={item.label}
+                >
+                {item.title}
+                </a>
+            ))
+        }
+        <!-- <a href="/">Home</a>
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact">Contact</a> -->
     </nav>
 </header>
+
+<style>
+    nav{
+        animation: scroll-shadow 1s linear both;
+        animation-timeline: scroll();
+        animation-range: 0 100px;
+    }
+
+    @keyframes scroll-shadow{
+        to{
+            @apply shadow-lg ring-1 backdrop-blur bg-gray-800/90 dark:bg-white/50 ring-white/10
+        }
+    }
+</style>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('header nav a');
+      //  console.log(navItems);
+      //  console.log(sections);
+
+        const callbackfn = (entries:IntersectionObserverEntry[])=>{
+            entries.forEach((entry:IntersectionObserverEntry)=>{
+                if(entry.isIntersecting){
+                    let id = entry.target.id;
+                    navItems.forEach(item=>{
+                        if(item.getAttribute("aria-label")===id){
+                            item.classList.add("text-yellow-400");
+                        }else{
+                            item.classList.remove("text-yellow-400");
+                        }
+                    })                
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver(callbackfn,{
+            root:null,
+            rootMargin:"0px",
+            threshold:0.5
+        });
+
+        sections.forEach(section=>{
+            observer.observe(section);
+        });
+
+        document.onvisibilitychange = () => {
+        if (document.visibilityState === "hidden") {
+          observer.disconnect()
+        } else {
+          sections.forEach((section) => {
+            observer.observe(section)
+          })
+        }
+      }
+    });
+
+</script>
+
+  
